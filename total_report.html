@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Doctors Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        .fe{
+            width: 140px;
+        }
+       
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html">Doctors</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars custom-color"></i>
+
+        </button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <!-- <a class="nav-link" href="index.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Quản Lý Bệnh Nhân
+                        </a> -->
+                        <a class="nav-link collapsed" href="index.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Quản Lý Bệnh Nhân
+                        </a>
+                        <a class="nav-link collapsed" href="Medical_Records_(MR).html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Quản Lý Bệnh Án
+                        </a>
+                        <a class="nav-link" href="Dentist Information.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Quản lý thông tin của nha sĩ
+                        </a>
+                        <a class="nav-link" href="Medical_services.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Quản Lý Dịch vụ y tế
+                        </a>
+                        <a class="nav-link" href="total_report.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Báo cáo
+                        </a>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Quản Lý báo cáo dịch vụ theo thời gian thực</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Quản Lý báo cáo dịch vụ theo thời gian thực</li>
+                    </ol>
+                    <div>
+                <form action="">
+                    <div class="form-group d-flex flex-row align-items-center justify-content: flex-start">
+                        <label for="tungay" class="mr-2">Từ Ngày:</label>
+                        <input type="date" class="form-control mr-2 fe" id="tungay" name="tungay"> <label
+                            for="denngay" class="mr-2">Đến Ngày:</label>
+                        <input type="date" class="form-control fe" id="denngay" name="denngay" >
+                    </div>
+                </form>
+
+                        
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Danh sách bệnh nhân theo thời gian 
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Họ tên</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Các dịch vụ đã sử dụng</th>                                        
+                                        <th>Ngày khám</th>
+                                        
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="patientTableBody">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#addPatientModal">Xuất báo cáo
+                                </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal thêm bệnh án -->               
+                
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var patientTableBody = document.getElementById("patientTableBody");
+
+            // Dữ liệu mẫu để thêm vào bảng
+            for (var i = 1; i <= 20; i++) {
+                var row = "<tr>" +
+                    "<td>" + i + "</td>" +
+                    "<td>Nguyễn Văn A " + i + "</td>" +
+                    "<td>Hà Nội</td>" +
+                    "<td>01/01/1990</td>" +
+                    "<td>Kiểm tra sức khỏe răng</td>" +
+                    "<td>01/01/2023</td>" +                            
+                    "</td>" +
+                    "</tr>";
+                patientTableBody.innerHTML += row;
+            }
+        });
+    </script>
+</body>
+
+</html>
